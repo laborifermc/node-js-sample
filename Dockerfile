@@ -17,7 +17,6 @@ RUN ls -al /app
 # Installer les dépendances du projet
 WORKDIR /app/node-js-sample  
 RUN npm install
-RUN npm start
 # Afficher le contenu du répertoire après l'installation des dépendances
 RUN ls -al /app/node-js-sample
 
