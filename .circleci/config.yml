@@ -22,10 +22,6 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Login to DockerHub
-          command: |
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-      - run:
           name: Build Docker Image
           command: |
             docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
