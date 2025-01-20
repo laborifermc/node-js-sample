@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
+            curl localhost:8080
             docker build -t vblaas/node-js-sample-cour:latest .
       - run:
           name: Push Docker Image to DockerHub
