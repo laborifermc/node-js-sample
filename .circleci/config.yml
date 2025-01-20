@@ -12,7 +12,7 @@ jobs:
   build-and-push:
     executor: docker-executor
     environment:
-      DOCKER_IMAGE: vblaas/node-js-sample
+      DOCKER_IMAGE: vblaas/node-js-sample-cour
       DOCKER_TAG: latest
     steps:
       - checkout
