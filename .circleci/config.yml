@@ -14,24 +14,24 @@ jobs:
     environment:
       DOCKER_IMAGE: laborifermc/node-js-sample
       DOCKER_TAG: latest
-      APP_URL: "http://localhost:3000"  # Changez en fonction du port de votre application
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Check if application is running
+          name: Build Docker Image
           command: |
-            echo "Waiting for the application to be ready..."
-            curl http://localhost:8080
+            docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
+      - run:
+          name: Run the application to check if it's running
+          command: |
+            docker run -d -p 8080:8080 $DOCKER_IMAGE:$DOCKER_TAG
+            sleep 5  # Donne à l'application le temps de démarrer
+            curl http://localhost:8080  # Vérifier si l'application répond
       - run:
           name: Login to DockerHub
           command: |
             docker login -u $DOCKERHUB_USERNAME -p $TOKEN_DOCKER
-      - run:
-          name: Build Docker Image
-          command: |
-            docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
       - run:
           name: Push Docker Image to DockerHub
           command: |
