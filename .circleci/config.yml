@@ -28,8 +28,8 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build -t node-js-sample-cour:latest .
+            docker build -t vblaas/node-js-sample-cour:latest .
       - run:
           name: Push Docker Image to DockerHub
           command: |
-            docker push node-js-sample-cour:latest
+            docker push vblaas/node-js-sample-cour:latest
