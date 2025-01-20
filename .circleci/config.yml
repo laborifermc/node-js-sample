@@ -1,8 +1,4 @@
 version: 2.1
-executors:
-  docker-executor:
-    docker:
-      - image: cimg/base:2022.09
 workflows:
   version: 2
   build-and-push:
@@ -10,7 +6,8 @@ workflows:
       - build-and-push
 jobs:
   build-and-push:
-    executor: docker-executor
+    machine:
+      image: ubuntu-2004:current
     environment:
       DOCKER_IMAGE: vblaas/node-js-sample-cour
       DOCKER_TAG: latest
