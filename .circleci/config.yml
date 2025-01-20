@@ -3,7 +3,7 @@ executors:
   docker-executor:
     docker:
       - image: cimg/base:2022.09
-      auth:
+        auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
 workflows:
