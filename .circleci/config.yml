@@ -27,7 +27,7 @@ jobs:
           command: |
             docker run -d $DOCKER_IMAGE:$DOCKER_TAG
             sleep 5  # Donne à l'application le temps de démarrer
-            curl http://127.0.0.1:8080  # Vérifier si l'application répond
+            curl 127.0.0.1:8080  # Vérifier si l'application répond
       - run:
           name: Login to DockerHub
           command: |
