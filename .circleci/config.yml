@@ -13,8 +13,6 @@ jobs:
       DOCKER_TAG: latest
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Build Docker Image
           command: |
