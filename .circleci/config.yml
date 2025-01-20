@@ -5,7 +5,7 @@ executors:
       - image: cimg/base:2022.09
         auth:
           username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
+          password: $TOCKEN_DOCKER
 workflows:
   version: 2
   build-and-push:
@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Login to DockerHub
           command: |
-            docker login -u $DOCKERHUB_USERNAME -p $TOCKEN_DOCKER
+            docker login -u $DOCKERHUB_USERNAME -p $TOKEN_DOCKER
       - run:
           name: Build Docker Image
           command: |
