@@ -10,6 +10,7 @@ WORKDIR /app
 # Cloner un dépôt (à remplacer par l'URL de votre dépôt)
 ARG REPO_URL=https://github.com/laborifermc/node-js-sample.git
 RUN git clone $REPO_URL .
+RUN ls
 RUN cd node-js-sample
 # Installer les dépendances du projet
 RUN npm install
