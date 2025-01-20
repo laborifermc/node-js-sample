@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Login to DockerHub
           command: |
-            docker login -u $DOCKERHUB_USERNAME -p $TOKEN_DOCKER
+            docker login -u $DOCKERHUB_USERNAME -p ${TOKEN_DOCKER}
       - run:
           name: Build Docker Image
           command: |
