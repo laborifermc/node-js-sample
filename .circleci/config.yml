@@ -3,9 +3,6 @@ executors:
   docker-executor:
     docker:
       - image: cimg/base:2022.09
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $TOCKEN_DOCKER
 workflows:
   version: 2
   build-and-push:
@@ -15,12 +12,32 @@ jobs:
   build-and-push:
     executor: docker-executor
     environment:
-      DOCKER_IMAGE: laborifermc/node-js-sample # Remplacez par votre namespace et nom d'image DockerHub
-      DOCKER_TAG: latest                       # Vous pouvez changer ce tag
+      DOCKER_IMAGE: laborifermc/node-js-sample
+      DOCKER_TAG: latest
+      APP_URL: "http://localhost:3000"  # Changez en fonction du port de votre application
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+      - run:
+          name: Check if application is running
+          command: |
+            echo "Waiting for the application to be ready..."
+            # Attendez jusqu'à 30 secondes pour que l'application réponde
+            for i in {1..30}; do
+              if curl --silent --fail localhost:8080 then
+                echo "Application is up and running!"
+                break
+              else
+                echo "Waiting for application to start..."
+                sleep 10
+              fi
+            done
+            # Vérifier si après 30 secondes l'application n'est toujours pas prête
+            if ! curl --silent --fail $APP_URL; then
+              echo "Application failed to start within the expected time!"
+              exit 1  # Échouer la tâche si l'application ne répond pas
+            fi
       - run:
           name: Login to DockerHub
           command: |
@@ -28,9 +45,8 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            curl localhost:8080
-            docker build -t vblaas/node-js-sample-cour:latest .
+            docker build -t $DOCKER_IMAGE:$DOCKER_TAG .
       - run:
           name: Push Docker Image to DockerHub
           command: |
-            docker push vblaas/node-js-sample-cour:latest
+            docker push $DOCKER_IMAGE:$DOCKER_TAG
