@@ -26,8 +26,8 @@ jobs:
           name: Run the application to check if it's running
           command: |
             docker run -d -p 8080:8080 $DOCKER_IMAGE:$DOCKER_TAG
-            sleep 5  # Donne à l'application le temps de démarrer
-            curl http://127.0.0.1:8080  # Vérifier si l'application répond
+            sleep 5  
+            curl http://127.0.0.1:8080  
       - run:
           name: Login to DockerHub
           command: |
