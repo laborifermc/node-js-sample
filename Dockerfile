@@ -1,5 +1,5 @@
-# Utiliser une image de base légère
-FROM alpine:latest
+# Utiliser une image de base légère avec Node.js
+FROM node:18-alpine
 
 # Installer Git
 RUN apk add --no-cache git
@@ -11,5 +11,11 @@ WORKDIR /app
 ARG REPO_URL=https://github.com/laborifermc/node-js-sample.git
 RUN git clone $REPO_URL .
 
-# Optionnel : Exposer un port ou définir une commande par défaut
-CMD ["sh"]
+# Installer les dépendances du projet
+RUN npm install
+
+# Exposer le port utilisé par l'application (remplacez "3000" par le port de votre app)
+EXPOSE 3000
+
+# Commande par défaut pour démarrer l'application
+CMD ["npm", "start"]

@@ -15,8 +15,6 @@ jobs:
           name: Build Docker Image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            echo "Using Docker tag: $TAG"
-            ls -al
             docker build -t js_image:$TAG .
 workflows:
   version: 2
