@@ -16,5 +16,5 @@ jobs:
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
             ls -al
-            docker build -t js_image Dockerfile
+            docker build -t js_image ./Dockerfile
       
