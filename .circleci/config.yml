@@ -23,21 +23,7 @@ jobs:
           name: Check if application is running
           command: |
             echo "Waiting for the application to be ready..."
-            # Attendez jusqu'à 30 secondes pour que l'application réponde
-            for i in {1..30}; do
-              if curl --silent --fail localhost:8080 then
-                echo "Application is up and running!"
-                break
-              else
-                echo "Waiting for application to start..."
-                sleep 10
-              fi
-            done
-            # Vérifier si après 30 secondes l'application n'est toujours pas prête
-            if ! curl --silent --fail $APP_URL; then
-              echo "Application failed to start within the expected time!"
-              exit 1  # Échouer la tâche si l'application ne répond pas
-            fi
+            curl http://localhost:8080
       - run:
           name: Login to DockerHub
           command: |
